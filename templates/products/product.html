@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block body %}
+<div class='row'>
+	<div class='six columns offset-by-three'>
+		{% with product.productphoto_set.all|first as image %}
+		<img class='u-max-full-width' src='{{ image.image.url }}' />
+		{% endwith %}
+	</div>
+</div>
+<div class='row'>
+	<div class='six columns offset-by-three'>
+		<br>
+		<h1 class='center'>{{ product.name }}</h1>
+		<p>{{ product.description }}</p>
+		<table class='u-full-width'>
+			<thead>
+				<tr>
+					<th>Tasty Nutrition</th>
+					<th>Yes/No</th>
+				</tr>
+			<tbody>
+				{% if product.price < 5 %}
+				<tr>
+					<td>Less than $5?</td>
+					<td>Yes</td>
+				</tr>
+				{% elif product.price < 10 %}
+				<tr>
+					<td>Less than $10?</td>
+					<td>Yes</td>
+				</tr>
+				{% elif product.price < 20 %}
+				<tr>
+					<td>Less than $20?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+				{% if product.meat %}
+				<tr>
+					<td>Meaty?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+				{% if product.vegan %}
+				<tr>
+					<td>Vegan?</td>
+					<td>Yes</td>
+				</th>
+				{% endif %}
+				{% if product.vegetarian %}
+				<tr>
+					<td>Vegetarian?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+				{% if product.vegetable_heavy %}
+				<tr>
+					<td>Serving of vegetables?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+				{% if product.low_sugar %}
+				<tr>
+					<td>Low in sugar?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+				{% if product.gluten_free %}	
+				<tr>
+					<td>Little or no gluten?</td>
+					<td>Yes</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+
+		<!----probably need to be wrapped in "ifs"---->
+
+		{% for history in product.history_set %}
+			<a href='/histories/{{ history.slug }}/'>{{ history.title }}</a>
+			<p>{{ history.description }}
+		{% endfor %}
+
+		{% for provenance in product.provenance_set %}
+			<a href='/provenance/{{ provenance.slug }}/'>{{ provenance.title }}</a>
+			<p>{{ provenance.description }}</p>
+		{% endfor %}
+
+		{% for preparation in product.preparation_set %}
+			<a href='/preparation/{{ preparation.slug }}/'>{{ preparation.title }}</a>
+			<p>{{ preparation.description }}</p>
+		{% endfor %}
+
+		{% for recipe in product.recipe_set %}
+			<a href='/recipes/{{ recipe.slug }}/'>{{ recipe.title }}</a>
+			<p>{{ recipe.description }}</p>
+		{% endfor %}
+
+		{% for producer in product.producer_set %}
+			<a href='/producers/{{ producer.id }}/'>{{ producer.user.first_name }}</a>
+			<p>{{ producer.description }}</p>
+		{% endfor %}
+
+		{% for new_product in product.same_producer_set %}
+			<a href='/same_producers/{{ new_product.slug }}/'>{{ product.name }}</a>
+			<p>{{ new_product.description }}</p>
+		{% endfor %}
+
+		{% for pairing in product.pairings_set %}
+			<a href='/pairings/{{ pairing.slug }}/'>{{ pairing.name }}</a>
+			<p>{{ pairing.description }}</p>
+		{% endfor %}
+
+		{% for environmental_impact in product.environmental_impact_set %}
+			<a href='/environmental_impact/{{ environmental_impact.slug }}/'>{{ environmental_impact.name }}</a>
+			<p>{{ environmental_impact.description }}</p>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<head>
+{% load static from staticfiles %}
+<link rel='stylesheet' type='text/css' href='{% static "skeleton/skeleton.css" %}'/>
+<link rel='stylesheet' type='text/css' href='{% static "skeleton/normalize.css" %}'/>
+<link rel='stylesheet' type='text/css' href='{% static "skeleton/custom.css" %}'/>
+<link href="https://fonts.googleapis.com/css?family=Cabin:700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+</head>
+<body class='light-green-background'>
+	<div class='container'>
+		<br>
+		<div class='row'>
+			<div class='two columns offset-by-five'>
+				<object class='u-max-full-width' data='{% static "logos/logo.svg" %}' type='image/svg+xml'></object>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='six columns offset-by-three'>
+				<h4 class='center logo-color'>EatSeminole</h4>
+				<p class='center'><i>Heritage produce and game less than 60 miles from downtown Orlando</i></p>
+			</div>
+		</div>
+	{% block body %}
+	{% endblock %}
+	</div>
+</body>
